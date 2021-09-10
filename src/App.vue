@@ -6,6 +6,13 @@
       <h1 class="text-danger text-uppercase">Boolflix</h1>
       <Searchbar @sendTitle="getTitle" />
     </header>
+    <main>
+      <ul>
+        <li v-for="movie in moviesList" :key="movie.id">
+          {{ movie.title }}
+        </li>
+      </ul>
+    </main>
   </div>
 </template>
 
@@ -20,7 +27,7 @@ export default {
   data() {
     return {
       selectedMovie: "up",
-      moviesList: {},
+      moviesList: [{}],
     };
   },
   methods: {
@@ -31,10 +38,10 @@ export default {
   created() {
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT&query=${this.selectedMovie}`
+        `https://api.themoviedb.org/3/search/movie?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT&query=up`
       )
       .then((res) => {
-        this.moviesList = res;
+        this.moviesList = res.data.results;
       })
       .catch((warning) => {
         console.log(warning);
