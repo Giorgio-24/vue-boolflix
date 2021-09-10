@@ -4,7 +4,7 @@
       class="d-flex justify-content-between align-items-center bg-dark px-3"
     >
       <h1 class="text-danger text-uppercase">Boolflix</h1>
-      <Searchbar />
+      <Searchbar @sendTitle="getTitle" />
     </header>
   </div>
 </template>
@@ -23,15 +23,20 @@ export default {
       moviesList: {},
     };
   },
+  methods: {
+    getTitle(userTitle) {
+      this.selectedMovie = userTitle;
+    },
+  },
   created() {
     axios
       .get(
         `https://api.themoviedb.org/3/search/movie?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT&query=${this.selectedMovie}`
       )
-      .then(function (res) {
+      .then((res) => {
         this.moviesList = res;
       })
-      .catch(function (warning) {
+      .catch((warning) => {
         console.log(warning);
       });
   },
