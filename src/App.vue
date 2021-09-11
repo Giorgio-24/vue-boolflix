@@ -11,12 +11,12 @@
       <Card :list="moviesList" />
       <h3>Series</h3>
       <Card :list="seriesList" />
-      <ul class="series-list">
+      <!--       <ul class="series-list">
         <li class="mb-3" v-for="serie in seriesList" :key="serie.id">
           <ul>
             <li>Title: {{ serie.name }}</li>
             <li>Original title: {{ serie.original_name }}</li>
-            <li>
+             <li>
               Original language:
               <div class="flag-box" v-if="getFlag(serie.original_language)">
                 <img
@@ -77,7 +77,7 @@
             </li>
           </ul>
         </li>
-      </ul>
+      </ul> -->
     </main>
   </div>
 </template>
