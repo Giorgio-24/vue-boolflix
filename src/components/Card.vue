@@ -2,8 +2,17 @@
   <ul class="cards-list">
     <li class="mb-3" v-for="element in list" :key="element.id">
       <ul>
-        <li>Title: {{ element.title }}</li>
-        <li>Original title: {{ element.original_title }}</li>
+        <li>
+          Title: <span v-if="element.title">{{ element.title }}</span>
+          <span v-else>{{ element.name }}</span>
+        </li>
+        <li>
+          Original title:
+          <span v-if="element.original_title">{{
+            element.original_title
+          }}</span>
+          <span v-else>{{ element.original_name }}</span>
+        </li>
         <li>
           Original language:
           <div class="flag-box" v-if="getFlag(element.original_language)">
@@ -17,7 +26,6 @@
             element.original_language
           }}</span>
         </li>
-        -
         <li>
           Average: {{ getAverage(element.vote_average) }}
           <i
