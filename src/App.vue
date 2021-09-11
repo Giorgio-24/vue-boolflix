@@ -13,7 +13,19 @@
           <ul>
             <li>Title: {{ movie.title }}</li>
             <li>Original title: {{ movie.original_title }}</li>
-            <li>Original language: {{ movie.original_language }}</li>
+            <li>
+              Original language:
+              <div class="flag-box" v-if="getFlag(movie.original_language)">
+                <img
+                  class="img-fluid"
+                  :src="getFlag(movie.original_language)"
+                  :alt="movie.original_language"
+                />
+              </div>
+              <span v-if="!getFlag(movie.original_language)">{{
+                movie.original_language
+              }}</span>
+            </li>
             <li>Rating: {{ movie.vote_average }}</li>
           </ul>
         </li>
@@ -24,7 +36,19 @@
           <ul>
             <li>Title: {{ serie.name }}</li>
             <li>Original title: {{ serie.original_name }}</li>
-            <li>Original language: {{ serie.original_language }}</li>
+            <li>
+              Original language:
+              <div class="flag-box" v-if="getFlag(serie.original_language)">
+                <img
+                  class="img-fluid"
+                  :src="getFlag(serie.original_language)"
+                  :alt="serie.original_language"
+                />
+              </div>
+              <span v-if="!getFlag(serie.original_language)">{{
+                serie.original_language
+              }}</span>
+            </li>
             <li>Rating: {{ serie.vote_average }}</li>
           </ul>
         </li>
@@ -51,6 +75,15 @@ export default {
   methods: {
     getTitle(userTitle) {
       this.selectedMovie = userTitle;
+    },
+    getFlag(language) {
+      if (language == "en") {
+        return require(`./assets/images/en.png`);
+      } else if (language == "it") {
+        return require(`./assets/images/it.png`);
+      } else {
+        return;
+      }
     },
     axiosTemplate() {
       axios
