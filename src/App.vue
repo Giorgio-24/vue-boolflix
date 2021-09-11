@@ -27,7 +27,44 @@
                   movie.original_language
                 }}</span>
               </li>
-              <li>Rating: {{ movie.vote_average }}</li>
+              <li>
+                Average: {{ getAverage(movie.vote_average) }}
+                <i
+                  :class="
+                    getAverage(movie.vote_average) < 1
+                      ? 'far fa-star'
+                      : 'fas fa-star color-gold'
+                  "
+                ></i>
+                <i
+                  :class="
+                    getAverage(movie.vote_average) < 2
+                      ? 'far fa-star'
+                      : 'fas fa-star color-gold'
+                  "
+                ></i>
+                <i
+                  :class="
+                    getAverage(movie.vote_average) < 3
+                      ? 'far fa-star'
+                      : 'fas fa-star color-gold'
+                  "
+                ></i>
+                <i
+                  :class="
+                    getAverage(movie.vote_average) < 4
+                      ? 'far fa-star'
+                      : 'fas fa-star color-gold'
+                  "
+                ></i>
+                <i
+                  :class="
+                    getAverage(movie.vote_average) < 5
+                      ? 'far fa-star'
+                      : 'fas fa-star color-gold'
+                  "
+                ></i>
+              </li>
             </ul>
             <ul>
               <li>
@@ -59,7 +96,11 @@
                 serie.original_language
               }}</span>
             </li>
-            <li>Rating: {{ serie.vote_average }}</li>
+            <li>
+              <i class="fas fa-star" style="color: goldenrod"></i>
+              <i class="far fa-star"></i>
+              {{ getAverage(serie.vote_average) }}
+            </li>
           </ul>
           <ul>
             <li>
@@ -102,6 +143,9 @@ export default {
       } else {
         return;
       }
+    },
+    getAverage(average) {
+      return Math.ceil(average % 2);
     },
     axiosTemplate() {
       axios
