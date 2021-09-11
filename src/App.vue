@@ -9,26 +9,36 @@
     <main>
       <h3>Film</h3>
       <ul class="">
-        <li class="mb-3" v-for="movie in moviesList" :key="movie.id">
-          <ul>
-            <li>Title: {{ movie.title }}</li>
-            <li>Original title: {{ movie.original_title }}</li>
-            <li>
-              Original language:
-              <div class="flag-box" v-if="getFlag(movie.original_language)">
+        <div>
+          <li class="mb-3" v-for="movie in moviesList" :key="movie.id">
+            <ul>
+              <li>Title: {{ movie.title }}</li>
+              <li>Original title: {{ movie.original_title }}</li>
+              <li>
+                Original language:
+                <div class="flag-box" v-if="getFlag(movie.original_language)">
+                  <img
+                    class="img-fluid"
+                    :src="getFlag(movie.original_language)"
+                    :alt="movie.original_language"
+                  />
+                </div>
+                <span v-if="!getFlag(movie.original_language)">{{
+                  movie.original_language
+                }}</span>
+              </li>
+              <li>Rating: {{ movie.vote_average }}</li>
+            </ul>
+            <ul>
+              <li>
                 <img
-                  class="img-fluid"
-                  :src="getFlag(movie.original_language)"
-                  :alt="movie.original_language"
+                  :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`"
+                  :alt="`${movie.title}-cover`"
                 />
-              </div>
-              <span v-if="!getFlag(movie.original_language)">{{
-                movie.original_language
-              }}</span>
-            </li>
-            <li>Rating: {{ movie.vote_average }}</li>
-          </ul>
-        </li>
+              </li>
+            </ul>
+          </li>
+        </div>
       </ul>
       <h3>Serie</h3>
       <ul>
@@ -50,6 +60,14 @@
               }}</span>
             </li>
             <li>Rating: {{ serie.vote_average }}</li>
+          </ul>
+          <ul>
+            <li>
+              <img
+                :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`"
+                :alt="`${serie.title}-cover`"
+              />
+            </li>
           </ul>
         </li>
       </ul>
