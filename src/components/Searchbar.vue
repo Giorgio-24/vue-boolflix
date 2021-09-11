@@ -12,7 +12,10 @@
       <span
         class="input-group-text border-0 bg-danger text-white"
         id="basic-addon2"
-        @click="$emit('sendTitle', userTitle)"
+        @click="
+          $emit('sendTitle', userTitle);
+          $emit('newTemplate');
+        "
         >Search</span
       >
     </div>
