@@ -6,11 +6,11 @@
       <h1 class="text-danger text-uppercase">Boolflix</h1>
       <Searchbar @sendTitle="getTitle" @newTemplate="axiosTemplate" />
     </header>
-    <main>
+    <main class="container-fluid">
       <h3>Movies</h3>
-      <Card :list="moviesList" />
+      <Card :list="moviesList" class="row" />
       <h3>Series</h3>
-      <Card :list="seriesList" />
+      <Card :list="seriesList" class="row" />
     </main>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      selectedMovie: "up",
+      selectedMovie: "",
       moviesList: [{}],
       seriesList: [{}],
     };
@@ -36,18 +36,6 @@ export default {
     getTitle(userTitle) {
       this.selectedMovie = userTitle;
     },
-    /*     getFlag(language) {
-      if (language == "en") {
-        return require(`./assets/images/en.png`);
-      } else if (language == "it") {
-        return require(`./assets/images/it.png`);
-      } else {
-        return;
-      }
-    }, */
-    /*     getAverage(average) {
-      return Math.ceil(average % 2);
-    }, */
     axiosTemplate() {
       axios
         .get(
