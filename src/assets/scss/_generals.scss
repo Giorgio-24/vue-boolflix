@@ -4,6 +4,9 @@
     box-sizing: border-box;
   }
   //^BODY
+  body{
+    background-color: #474747;
+  }
 
   //?HEADER
   header {
@@ -11,9 +14,9 @@
   }
 
   //?MAIN
-main{
+/* main{
   background-color: #474747
-}
+} */
 
   .flag-box{
     display: inline-block;
