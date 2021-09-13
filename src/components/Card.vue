@@ -37,38 +37,11 @@
               }}</span>
             </li>
             <li>
-              Average: {{ getAverage(element.vote_average) }}
               <i
+                v-for="(star, index) in 5"
+                :key="index"
                 :class="
-                  getAverage(element.vote_average) < 1
-                    ? 'far fa-star'
-                    : 'fas fa-star color-gold'
-                "
-              ></i>
-              <i
-                :class="
-                  getAverage(element.vote_average) < 2
-                    ? 'far fa-star'
-                    : 'fas fa-star color-gold'
-                "
-              ></i>
-              <i
-                :class="
-                  getAverage(element.vote_average) < 3
-                    ? 'far fa-star'
-                    : 'fas fa-star color-gold'
-                "
-              ></i>
-              <i
-                :class="
-                  getAverage(element.vote_average) < 4
-                    ? 'far fa-star'
-                    : 'fas fa-star color-gold'
-                "
-              ></i>
-              <i
-                :class="
-                  getAverage(element.vote_average) < 5
+                  getAverage(star, index)
                     ? 'far fa-star'
                     : 'fas fa-star color-gold'
                 "
@@ -111,8 +84,11 @@ export default {
         return;
       }
     },
-    getAverage(average) {
-      return Math.ceil(average / 2);
+    getAverage(item, index) {
+      const average = Math.ceil(item / 2);
+      if (average < index) {
+        return true;
+      }
     },
   },
 };
