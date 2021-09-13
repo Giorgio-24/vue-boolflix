@@ -8,14 +8,14 @@
         placeholder="Search..."
         buttonText="Search"
         @sendResearch="getTitle"
-        @newTemplate="axiosTemplate"
+        @newTemplate="getList"
       />
     </header>
     <main v-if="selectedMovie" class="container-fluid">
       <h3>Movies</h3>
-      <Card :list="moviesList" class="row" />
+      <Card :list="movies" class="row" />
       <h3>Series</h3>
-      <Card :list="seriesList" class="row" />
+      <Card :list="series" class="row" />
     </main>
   </div>
 </template>
@@ -33,35 +33,43 @@ export default {
   data() {
     return {
       selectedMovie: "",
-      moviesList: [{}],
-      seriesList: [{}],
+      movies: [{}],
+      series: [{}],
+      api: {
+        baseUri: "https://api.themoviedb.org/3",
+        key: "a49fd2ad1915c16f5b21a815b7e90362",
+      },
     };
   },
   methods: {
     getTitle(userResearch) {
       this.selectedMovie = userResearch;
     },
-    axiosTemplate() {
+    getList() {
+      this.axiosTemplate("search/movie", "movies");
+      this.axiosTemplate("search/tv", "series");
+    },
+    axiosTemplate(params, key) {
       axios
         .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT&query=${this.selectedMovie}`
+          `${this.api.baseUri}/${params}?api_key=${this.api.key}&language=it-IT&query=${this.selectedMovie}`
         )
         .then((res) => {
-          this.moviesList = res.data.results;
+          this[key] = res.data.results;
         })
         .catch((warning) => {
           console.log(warning);
         });
-      axios
+      /*       axios
         .get(
           `https://api.themoviedb.org/3/search/tv?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT&query=${this.selectedMovie}`
         )
         .then((res) => {
-          this.seriesList = res.data.results;
+          this.series = res.data.results;
         })
         .catch((warning) => {
           console.log(warning);
-        });
+        }); */
     },
   },
 };
@@ -70,3 +78,4 @@ export default {
 <style lang="scss">
 @import "./assets/scss/_style.scss";
 </style>
+ 
