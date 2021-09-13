@@ -12,9 +12,9 @@
       />
     </header>
     <main v-if="selectedMovie" class="container-fluid">
-      <h3>Movies</h3>
+      <h3 class="mt-5 mb-4 h1 text-white">Movies:</h3>
       <Card :list="movies" class="row" />
-      <h3>Series</h3>
+      <h3 class="mt-5 mb-4 h1 text-white">Series:</h3>
       <Card :list="series" class="row" />
     </main>
   </div>
@@ -48,6 +48,8 @@ export default {
     getList() {
       this.axiosTemplate("search/movie", "movies");
       this.axiosTemplate("search/tv", "series");
+      this.axiosTemplate("search/tv", "series");
+      //!https://api.themoviedb.org/3/movie/27205/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=en-US
     },
     axiosTemplate(params, key) {
       axios
