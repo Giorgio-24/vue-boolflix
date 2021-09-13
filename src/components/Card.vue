@@ -139,6 +139,8 @@ export default {
   }
   img.cover {
     border: 3px solid #fff;
+    height: 513px;
+    width: 342px;
   }
 }
 </style>
