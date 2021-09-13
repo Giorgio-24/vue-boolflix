@@ -8,8 +8,12 @@
       <ul class="card-list position-absolute bg-dark text-white px-4">
         <li class="mb-3">
           <ul>
+            <li>{{ element.genre_ids }}</li>
             <li>
-              Title: <span v-if="element.title">{{ element.title }}</span>
+              Title:
+              <span v-if="element.title">{{
+                element.title || element.name
+              }}</span>
               <span v-else>{{ element.name }}</span>
             </li>
             <li>
@@ -75,9 +79,16 @@
         </li>
       </ul>
       <img
+        v-if="element.poster_path"
         class="cover position-absolute"
         :src="`https://image.tmdb.org/t/p/w342/${element.poster_path}`"
         :alt="`${element.title}-cover`"
+      />
+      <img
+        class="cover h-100"
+        v-else
+        src="https://www.altavod.com/assets/images/poster-placeholder.png"
+        alt="missing-image-placeholder"
       />
     </div>
   </div>
@@ -101,7 +112,7 @@ export default {
       }
     },
     getAverage(average) {
-      return Math.ceil(average % 2);
+      return Math.ceil(average / 2);
     },
   },
 };

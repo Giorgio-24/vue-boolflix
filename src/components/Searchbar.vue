@@ -4,19 +4,23 @@
       <input
         type="text"
         class="form-control border-0"
-        placeholder="Search..."
+        :placeholder="placeholder"
+        @keyup.enter="
+          $emit('sendResearch', userResearch);
+          $emit('newTemplate');
+        "
         aria-label="Recipient's username"
         aria-describedby="basic-addon2"
-        v-model.trim="userTitle"
+        v-model.trim="userResearch"
       />
       <span
         class="input-group-text border-0 bg-danger text-white"
         id="basic-addon2"
         @click="
-          $emit('sendTitle', userTitle);
+          $emit('sendResearch', userResearch);
           $emit('newTemplate');
         "
-        >Search</span
+        >{{ buttonText }}</span
       >
     </div>
   </div>
@@ -25,9 +29,10 @@
 <script>
 export default {
   name: "Searchbar",
+  props: ["placeholder", "buttonText"],
   data() {
     return {
-      userTitle: "",
+      userResearch: "",
     };
   },
 };

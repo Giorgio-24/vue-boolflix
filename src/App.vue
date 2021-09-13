@@ -4,9 +4,14 @@
       class="d-flex justify-content-between align-items-center bg-dark px-3"
     >
       <h1 class="text-danger text-uppercase">Boolflix</h1>
-      <Searchbar @sendTitle="getTitle" @newTemplate="axiosTemplate" />
+      <Searchbar
+        placeholder="Search..."
+        buttonText="Search"
+        @sendResearch="getTitle"
+        @newTemplate="axiosTemplate"
+      />
     </header>
-    <main class="container-fluid">
+    <main v-if="selectedMovie" class="container-fluid">
       <h3>Movies</h3>
       <Card :list="moviesList" class="row" />
       <h3>Series</h3>
@@ -33,8 +38,8 @@ export default {
     };
   },
   methods: {
-    getTitle(userTitle) {
-      this.selectedMovie = userTitle;
+    getTitle(userResearch) {
+      this.selectedMovie = userResearch;
     },
     axiosTemplate() {
       axios
