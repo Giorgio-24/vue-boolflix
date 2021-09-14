@@ -18,6 +18,7 @@ export default {
   },
   methods: {
     axiosTemplate() {
+      if (!this.id) return;
       axios
         .get(
           `https://api.themoviedb.org/3/${this.endpoint}/${this.id}/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT`

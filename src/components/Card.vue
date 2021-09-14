@@ -84,9 +84,8 @@ export default {
   },
   methods: {
     getGenres(currentGenres) {
-      if (!currentGenres) {
-        return;
-      }
+      if (!currentGenres) return;
+
       let genresArray = [];
       for (let i = 0; i < currentGenres.length; i++) {
         this.genres.forEach((element) => {
