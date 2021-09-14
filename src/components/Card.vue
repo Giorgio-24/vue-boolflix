@@ -69,15 +69,12 @@
 </template>
 
 <script>
-import axios from "axios";
 import Actors from "../components/Actors.vue";
 export default {
   name: "card",
-  props: ["params", "list"],
+  props: ["params", "list", "genresList"],
   data() {
-    return {
-      genres: [],
-    };
+    return {};
   },
   components: {
     Actors,
@@ -88,7 +85,7 @@ export default {
 
       let genresArray = [];
       for (let i = 0; i < currentGenres.length; i++) {
-        this.genres.forEach((element) => {
+        this.genresList.forEach((element) => {
           if (element.id == currentGenres[i]) {
             genresArray.push(element.name);
           }
@@ -111,19 +108,6 @@ export default {
         return true;
       }
     },
-  },
-  created() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/genre/${this.params}/list?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT`
-        //https://api.themoviedb.org/3/genre/movie/list?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT
-      )
-      .then((res) => {
-        this.genres = res.data.genres;
-      })
-      .catch((warning) => {
-        console.log(warning);
-      });
   },
 };
 </script>
