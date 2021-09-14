@@ -10,26 +10,31 @@
 import axios from "axios";
 export default {
   name: "Actors",
-  props: ["id"],
+  props: ["id", "endpoint"],
   data() {
     return {
       cast: [],
     };
   },
+  methods: {
+    axiosTemplate() {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/${this.endpoint}/${this.id}/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT`
+          //!https://api.themoviedb.org/3/movie/27205/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=en-US
+        )
+        .then((res) => {
+          for (let i = 0; i < 5; i++) {
+            this.cast.push(res.data.cast[i].name);
+          }
+        })
+        .catch((warning) => {
+          console.log(warning);
+        });
+    },
+  },
   created() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${this.id}/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT`
-        //!https://api.themoviedb.org/3/movie/27205/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=en-US
-      )
-      .then((res) => {
-        for (let i = 0; i < 5; i++) {
-          this.cast.push(res.data.cast[i].name);
-        }
-      })
-      .catch((warning) => {
-        console.log(warning);
-      });
+    this.axiosTemplate();
   },
 };
 </script>

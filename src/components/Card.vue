@@ -47,7 +47,9 @@
                 "
               ></i>
             </li>
-            <li><Actors :id="element.id" /></li>
+            <li><Actors :id="element.id" :endpoint="params" /></li>
+            <!-- 
+            <li v-else><Actors :id="element.id" endpoint="tv" /></li> -->
             <li>{{ element.overview }}</li>
           </ul>
         </li>
