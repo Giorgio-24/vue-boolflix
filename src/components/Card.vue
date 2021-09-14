@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <div
       class="card-structure position-relative m-4"
       v-for="element in list"
@@ -47,6 +47,7 @@
                 "
               ></i>
             </li>
+            <li><Actors :id="element.id" /></li>
             <li>{{ element.overview }}</li>
           </ul>
         </li>
@@ -64,15 +65,19 @@
         alt="missing-image-placeholder"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import Actors from "../components/Actors.vue";
 export default {
   name: "card",
-  props: ["list"],
+  props: ["params", "list"],
   data() {
     return {};
+  },
+  components: {
+    Actors,
   },
   methods: {
     getFlag(language) {
@@ -90,6 +95,31 @@ export default {
         return true;
       }
     },
+    /*     getActors(element) {
+      console.log(element);
+      let actorsList = ["ei"];
+      console.log(
+        `https://api.themoviedb.org/3/${this.params}/${element}/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT`
+      );
+      axios
+        .get(
+          `https://api.themoviedb.org/3/${this.params}/${element}/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=it-IT`
+          //!https://api.themoviedb.org/3/movie/27205/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=en-US
+        )
+        .then((res) => {
+          for (let i = 0; i < 5; i++) {
+            actorsList.push(res.data.cast[i].name);
+          }
+          console.log(actorsList);
+          actorsList.push(actorsList);
+          return actorsList;
+        })
+        .catch((warning) => {
+          console.log(warning);
+        });
+      //! DEVI FARLO VEDERE QUI return;
+      return actorsList;
+    }, */
   },
 };
 </script>

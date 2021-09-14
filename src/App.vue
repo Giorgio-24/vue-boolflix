@@ -13,9 +13,9 @@
     </header>
     <main v-if="selectedMovie" class="container-fluid">
       <h3 class="mt-5 mb-4 h1 text-white">Movies:</h3>
-      <Card :list="movies" class="row" />
+      <Card :list="movies" :params="'movie'" class="row" />
       <h3 class="mt-5 mb-4 h1 text-white">Series:</h3>
-      <Card :list="series" class="row" />
+      <Card :list="series" :params="'tv'" class="row" />
     </main>
   </div>
 </template>
@@ -45,11 +45,34 @@ export default {
     getTitle(userResearch) {
       this.selectedMovie = userResearch;
     },
+    /*     getActors(params, key) {
+      console.log(params);
+      this[key].forEach((element) => {
+        console.log(
+          `${this.api.baseUri}/${params}/${element.id}/credits?api_key=${this.api.key}&language=it-IT`
+        );
+        axios
+          .get(
+            `${this.api.baseUri}/${params}/${element.id}/credits?api_key=${this.api.key}&language=it-IT`
+            //!https://api.themoviedb.org/3/movie/27205/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=en-US
+          )
+          .then((res) => {
+            let actorsList = [];
+            for (let i = 0; i < 5; i++) {
+              actorsList.push(res.data.cast[i].name);
+            }
+            element.push({ actors: actorsList });
+          })
+          .catch((warning) => {
+            console.log(warning);
+          });
+      });
+    }, */
     getList() {
       this.axiosTemplate("search/movie", "movies");
       this.axiosTemplate("search/tv", "series");
-      this.axiosTemplate("search/tv", "series");
-      //!https://api.themoviedb.org/3/movie/27205/credits?api_key=a49fd2ad1915c16f5b21a815b7e90362&language=en-US
+      /*       this.getActors("movie", "movies");
+      this.getActors("tv", "series"); */
     },
     axiosTemplate(params, key) {
       axios
